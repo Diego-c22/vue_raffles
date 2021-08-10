@@ -22,7 +22,7 @@ function editTicket (id, formData, token) {
     url: `${URL}${id}/`,
     data: formData,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     }
   }
 
@@ -38,7 +38,7 @@ function getTickets (token) {
     method: 'GET',
     url: URL,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     }
   }
 
@@ -54,7 +54,7 @@ function getTicketsRaffle (id, token) {
     method: 'GET',
     url: `${URL}raffle/${id}/`,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     }
   }
 
@@ -69,5 +69,5 @@ export {
   createTicket,
   editTicket,
   getTickets,
-  getTicketsRaffle,
+  getTicketsRaffle
 }

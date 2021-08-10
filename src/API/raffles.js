@@ -61,7 +61,7 @@ function createRaffle (formData, token) {
     url: URL,
     data: formData,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     }
   }
 
