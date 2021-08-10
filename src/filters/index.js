@@ -1,8 +1,15 @@
+const amountPriceFilter = function (value) {
+  if (!value) {
+    return '0'
+  }
+  return '$' + Number(value).toLocaleString()
+}
+
 const amountFilter = function (value) {
   if (!value) {
     return '0'
   }
-  return '$' + value.toLocaleString('en')
+  return Number(value).toLocaleString()
 }
 
 const maxLegth = value => {
@@ -12,4 +19,4 @@ const maxLegth = value => {
   return value
 }
 
-export { amountFilter, maxLegth }
+export { amountFilter, maxLegth, amountPriceFilter }

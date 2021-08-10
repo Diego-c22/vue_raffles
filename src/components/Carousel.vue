@@ -1,5 +1,5 @@
 <template>
-    <div class="select-none relative flex justify-center flex-col md:flex-row" @mouseover="stopTimer" @mouseleave="restartTimer">
+    <div class="select-none relative flex justify-center flex-col md:flex-row" >
         <div class="mb-4 relative flex justify-center">
             <img :src="currentImage" class="max-h-screen" alt="">
             <div class="actions">
@@ -18,7 +18,7 @@
                 :class="['thumbnail-image', (activeImage == index) ? 'active' : '']"
                 @click="activateImage(index)"
             >
-                <img class="w-32 h-32 object-fill" :src="image.thumb">
+                <img class="w-32 h-32 object-fill" :src="image.image">
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@ export default {
     // and is the reason why we don't have to worry about the
     // big image getting updated
     currentImage () {
-      return this.images[this.activeImage].big
+      return this.images[this.activeImage].image
     }
   },
   methods: {
