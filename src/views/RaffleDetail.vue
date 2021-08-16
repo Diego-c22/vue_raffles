@@ -8,30 +8,35 @@
         <p class="p-1"><span class="font-bold">{{ raffle.ticket_price | price }}</span> por boleto</p>
       </div>
       <div class="p-2 my-2">
-        <p>{{ raffle.quantity_available_numbers | amount }} Boletos disponibles</p>
-        <button class="w-10/12 sm:w-3/4 lg:w-1/2 shadow-md rounded-full bg-primary p-2 text-white">Comprar boletos</button>
+        <p>{{ raffle.available_numbers | amount }} Boletos disponibles</p>
+        <button @click="showTickets = true" class="w-10/12 sm:w-3/4 lg:w-1/2 shadow-md rounded-full bg-primary p-2 text-white">Comprar boletos</button>
       </div>
       <p class="m-1 text-lg">Premio con precio de <span class="font-bold">{{ raffle.prize_price | price }}</span></p>
       <p class="font-bold">Descripcion:</p>
       <p>{{ raffle.description }}</p>
       <p class="font-bold my-3">Es sorteo se realizara el {{ raffle.drawing_date }}</p>
     </div>
+
+    <tickets @closeTab="showTickets = false" v-if="showTickets" :raffle="raffle"/>
   </div>
 </template>
 
 <script>
 import Carousel from '@/components/Carousel.vue'
+import Tickets from '@/components/Tickets.vue'
 import date from '@/mixins/date'
 import { getRaffle } from '@/API'
+
 export default {
   name: 'RaffleDetail',
   mixins: [date],
-  components: { Carousel },
+  components: { Carousel, Tickets },
 
   data () {
     return {
       raffle: {},
-      isLoading: false
+      isLoading: false,
+      showTickets: false
     }
   },
 

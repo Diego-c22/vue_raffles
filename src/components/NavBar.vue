@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gradient-to-r from-primary to-secundary flex justify-between items-center relative z-10 shadow-md">
+  <div class="bg-gradient-to-r from-primary to-secundary flex justify-between items-center relative z-20 shadow-md">
     <div class="h-16">
       <img class="h-full" src="../assets/img/top-rifas.png" alt="">
     </div>
