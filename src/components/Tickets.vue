@@ -1,53 +1,57 @@
 <template>
-  <div class="bg-white rounded-md shadow-2xl fixed top-10 z-30 p-2 bg-opacity-90 md:w-1/2">
-    <div class="flex justify-end text-right m-1">
-      <span @click="closeTab" class="font-bold text-2xl text-primary_dark cursor-pointer hover:text-warning">X</span>
-    </div>
-    <div v-show="ticketsSelected.length > 0">
-      <p>Numeros seleccionados</p>
-      <div class="grid grid-cols-5 border-2">
-        <span
-          v-for="ticket in ticketsSelected" :key="ticket"
-          class="shadow-xl rounded-full w-14 h-9 flex justify-center items-center m-1 border-primary_dark border scale-h cursor-pointer"
-          @click="deleteNumber(ticket)"
-        >
-          {{ ticket }}
-        </span>
+  <transition name="fade-scale">
+    <div class="bg-white rounded-md shadow-2xl fixed top-10 z-30 p-2 bg-opacity-90 md:w-1/2">
+      <div class="flex justify-end text-right m-1">
+        <span @click="closeTab" class="font-bold text-2xl text-primary_dark cursor-pointer hover:text-warning"><i class="fas fa-times"></i></span>
+      </div>
+      <div v-show="ticketsSelected.length > 0">
+        <p>Numeros seleccionados</p>
+        <div class="grid grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 border-2">
+          <span
+            v-for="ticket in ticketsSelected" :key="ticket"
+            class="shadow-xl rounded-full w-14 h-9 flex justify-center items-center m-1 border-primary_dark border scale-h cursor-pointer"
+            @click="deleteNumber(ticket)"
+          >
+            {{ ticket }}
+          </span>
+        </div>
+
+        <button class="button bg-primary p-2 m-1">Pagar Boletos</button>
+        <button class="button bg-primary_dark p-2 m-1">Reservar Boletos</button>
       </div>
 
-      <button class="button bg-primary p-2 m-1">Pagar Boletos</button>
-      <button class="button bg-primary_dark p-2 m-1">Reservar Boletos</button>
-    </div>
-
-    <div class="">
       <div class="">
-        <form class="flex mt-2" @submit.prevent="fillArrayNumbers">
-          <img src="../assets/img/search.svg" alt=" " class="absolute left-5 self-center text-primary p-1">
-          <input type="text" class="outline-none rounded-full w-full h-8 border text-center" placeholder="Buscar un numero" v-model="number">
-          <button type="submit" class="bg-primary p-1 mx-2 text-white rounded-sm">Buscar</button>
-        </form>
-        <p class="text-sm text-primary_dark mb-2">Buscar numero entre 1 y {{ raffle.numbers_quantity }}</p>
-      </div>
-      <div class="flex justify-around">
-        <div class="flex justify-center items-center"><span class="h-5 w-5 m-1 block border border-primary_dark"></span> <span>Disponible</span></div>
-        <div class="flex justify-center items-center"><span class="h-5 w-5 m-1 block border bg-secundary"></span> <span>Ocupado</span></div>
-        <div class="flex justify-center items-center"><span class="h-5 w-5 m-1 block border bg-primary_dark opacity-80"></span> <span>Reservado</span></div>
-      </div>
-      <div class="grid grid-cols-4 lg:grid-cols-6">
-        <span v-for="n in arrayNumbers" :key="n"
-          class="shadow-xl rounded-full w-20 h-10 m-1 border-primary_dark border scale-h cursor-pointer flex justify-center items-center"
-          :class="{ 'busy': busyNumbers.includes(n), 'reserved': reservedNumbers.includes(n), 'selected': ticketsSelected.includes(n) }"
-          @click="addNumber(n)">
-          {{ n }}
-        </span>
+        <div class="">
+          <form class="flex mt-2" @submit.prevent="fillArrayNumbers">
+            <img src="../assets/img/search.svg" alt=" " class="absolute left-5 self-center text-primary p-1">
+            <input type="text" class="outline-none rounded-full w-full h-8 border text-center" placeholder="Buscar un numero" v-model="number">
+            <button type="submit" class="bg-primary p-1 mx-2 text-white rounded-sm">Buscar</button>
+          </form>
+          <p class="text-sm text-primary_dark mb-2">Buscar numero entre 1 y {{ raffle.numbers_quantity }}</p>
+        </div>
+        <div class="flex justify-around">
+          <div class="flex justify-center items-center"><span class="h-5 w-5 m-1 block border border-primary_dark"></span> <span>Disponible</span></div>
+          <div class="flex justify-center items-center"><span class="h-5 w-5 m-1 block border bg-secundary"></span> <span>Ocupado</span></div>
+          <div class="flex justify-center items-center"><span class="h-5 w-5 m-1 block border bg-primary_dark opacity-80"></span> <span>Reservado</span></div>
+        </div>
+        <div class="grid grid-cols-4 lg:grid-cols-6">
+          <span v-for="n in arrayNumbers" :key="n"
+            class="shadow-xl rounded-full w-20 h-10 m-1 border-primary_dark border scale-h cursor-pointer flex justify-center items-center"
+            :class="{ 'busy': busyNumbers.includes(n), 'reserved': reservedNumbers.includes(n), 'selected': ticketsSelected.includes(n) }"
+            @click="addNumber(n)">
+            {{ n }}
+          </span>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
+import closeTab from '@/mixins/closeTab.js'
 export default {
   name: 'Tickets',
+  mixins: [closeTab],
   props: {
     raffle: {
       type: Object,
@@ -107,10 +111,6 @@ export default {
 
     deleteNumber (number) {
       this.ticketsSelected.pop(number)
-    },
-
-    closeTab () {
-      this.$emit('closeTab')
     }
   }
 }

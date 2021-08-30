@@ -10,27 +10,14 @@
         <p class="font-bold mr-4">{{ raffle.ticket_price | price }}</p>
       </div>
     </div>
-    <div class=""></div>
   </div>
 </template>
 
 <script>
 import date from '@/mixins/date'
+import cart from '@/mixins/cart'
 export default {
   name: 'RaffleCart',
-  mixins: [date],
-  props: {
-    raffle: {
-      type: Object,
-      required: true
-    }
-  },
-
-  methods: {
-    goToDetail () {
-      console.log('hola')
-      this.$router.push({ name: 'RaffleDetail', params: { id: this.raffle.id } })
-    }
-  }
+  mixins: [date, cart]
 }
 </script>
