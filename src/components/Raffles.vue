@@ -15,7 +15,7 @@
 <script>
 import { getRaffles } from '@/API'
 import RaffleCart from '@/components/RaffleCart.vue'
-import RaffleCartAdmin from '@/components/RaffleCartAdmin.vue'
+import RaffleCartAdmin from '@/components/adminComponents/RaffleCartAdmin.vue'
 
 export default {
   name: 'Raffles',

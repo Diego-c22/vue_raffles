@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import AdminBar from '@/components/AdminBar'
+import AdminBar from '@/components/adminComponents/AdminBar'
 export default {
   name: 'Admin',
   components: { AdminBar }

@@ -17,26 +17,32 @@
       <p class="font-bold my-3">Es sorteo se realizara el {{ raffle.drawing_date }}</p>
     </div>
 
-    <tickets @closeTab="showTickets = false" v-if="showTickets" :raffle="raffle"/>
+    <tickets @closeTab="showTickets = false" v-if="showTickets" :raffle="raffle" @onReserveNumbers="goToReserveNumbers"/>
+    <ticket-reserve @closeTab="showReserve = false" v-show="showReserve" :raffle="raffle" @update="update" @showMessage="createMessage(e)"/>
+    <message v-show="showMessage"/>
   </div>
 </template>
 
 <script>
 import Carousel from '@/components/Carousel.vue'
 import Tickets from '@/components/Tickets.vue'
+import TicketReserve from '@/components/TicketReserve.vue'
 import date from '@/mixins/date'
+import message from '@/mixins/message'
 import { getRaffle } from '@/API'
+import Message from '../components/Message.vue'
 
 export default {
   name: 'RaffleDetail',
-  mixins: [date],
-  components: { Carousel, Tickets },
+  mixins: [date, message],
+  components: { Carousel, Tickets, TicketReserve, Message },
 
   data () {
     return {
       raffle: {},
       isLoading: false,
-      showTickets: false
+      showTickets: false,
+      showReserve: false
     }
   },
 
@@ -63,6 +69,23 @@ export default {
         .then(res => { this.raffle = res })
       this.isLoading = false
       console.log(this.raffle)
+    },
+
+    async update () {
+      this.isLoading = true
+      const id = this.$route.params.id
+      await getRaffle(id)
+        .then(res => {
+          this.raffle.available_numbers = res.available_numbers
+          this.raffle.busy_numbers = res.busy_numbers
+        })
+      this.isLoading = false
+      console.log(this.raffle)
+    },
+
+    goToReserveNumbers () {
+      this.showTickets = false
+      this.showReserve = true
     }
   }
 }

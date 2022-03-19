@@ -37,7 +37,7 @@ const routes = [
     children: [
       {
         path: 'sorteos',
-        component: () => import(/* webpackChunkName: "about" */ '../components/AdminRaffle.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../components/adminComponents/AdminRaffle.vue')
       }
       /*
         {

@@ -4,7 +4,7 @@ const URL = 'http://127.0.0.1:8000/api/tickets/'
 
 function createTicket (formData) {
   const options = {
-    mehtod: 'POST',
+    method: 'POST',
     url: URL,
     data: formData
   }

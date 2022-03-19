@@ -9,9 +9,9 @@
 
 <script>
 import Raffles from '@/components/Raffles'
-import CreateButton from '@/components/CreateButton'
-import CreateRaffle from '@/components/CreateRaffle'
-import EditRaffle from '@/components/EditRaffle'
+import CreateButton from '@/components/adminComponents/CreateButton'
+import CreateRaffle from '@/components/adminComponents/CreateRaffle'
+import EditRaffle from '@/components/adminComponents/EditRaffle'
 export default {
   name: 'AdminRaffle',
   components: { Raffles, CreateButton, CreateRaffle, EditRaffle },

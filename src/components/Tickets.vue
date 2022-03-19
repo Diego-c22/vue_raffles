@@ -1,6 +1,6 @@
 <template>
   <transition name="fade-scale">
-    <div class="bg-white rounded-md shadow-2xl fixed top-10 z-30 p-2 bg-opacity-90 md:w-1/2">
+    <div class="bg-gray-100 rounded-md shadow-2xl fixed top-10 z-30 p-2 bg-opacity-90 md:w-1/2">
       <div class="flex justify-end text-right m-1">
         <span @click="closeTab" class="font-bold text-2xl text-primary_dark cursor-pointer hover:text-warning"><i class="fas fa-times"></i></span>
       </div>
@@ -17,7 +17,7 @@
         </div>
 
         <button class="button bg-primary p-2 m-1">Pagar Boletos</button>
-        <button class="button bg-primary_dark p-2 m-1">Reservar Boletos</button>
+        <button @click="reserveNumbers" class="button bg-primary_dark p-2 m-1">Reservar Boletos</button>
       </div>
 
       <div class="">
@@ -111,6 +111,11 @@ export default {
 
     deleteNumber (number) {
       this.ticketsSelected.pop(number)
+    },
+
+    reserveNumbers () {
+      this.$store.commit('setNumbers', this.ticketsSelected)
+      this.$emit('onReserveNumbers')
     }
   }
 }
@@ -143,5 +148,13 @@ export default {
 
 .busy:hover, .reserved:hover {
   scale: none;
+}
+
+.fade-scale-enter-active, .fade-scale-leave-active {
+  transition: all .3s;
+}
+
+.fade-scale-enter, .fade-scale-leave-to {
+  transform: scale(0)
 }
 </style>
